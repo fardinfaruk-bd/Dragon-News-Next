@@ -4,11 +4,20 @@ import SimilarCategoryBtn from '@/ui/SimilarCategoryBtn';
 import Image from 'next/image';
 import React from 'react';
 
+export const generateMetadata = async({params}) => {
+    const {id} = await params;
+    const news = await getNewsDetailsById(id);
+    return {
+        title: news.title,
+        description: news.details,
+    };
+
+};
+
 const NewsDetailsPage = async({params}) => {
     const {id} = await params;
-    console.log(id, "Params Id");
     const news = await getNewsDetailsById(id);
-    console.log(news, "News Details");
+    
     return (
         <div className='container mx-auto my-8'>
             <div className='grid grid-cols-12 gap-5 '>

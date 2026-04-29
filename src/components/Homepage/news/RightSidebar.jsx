@@ -13,7 +13,7 @@ import Bg from "@/assets/bg.png"
 const RightSidebar = () => {
     return (
         <div className='space-y-4'>
-            <h2 className='font-semibold text-xl'>Login With</h2>
+            <h2 className='font-semibold text-xl text-[#403F3F]'>Login With</h2>
             <div className='space-y-2'>
                 <button className='btn w-full border-blue-500 text-blue-500'><FcGoogle /> Login With Google</button>
                 <button className=' btn w-full'><FaGithub /> Login With Github</button>

@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import AvatarImage from "@/assets/user.png"
+import NavLink from './NavLink';
 
 const Navbar = () => {
     return (
@@ -10,9 +11,9 @@ const Navbar = () => {
 
             </div>
             <ul className=' flex gap-6 text-[#706F6F]'>
-                <li><Link href="/">Home</Link></li>
-                <li><Link href="/about">About</Link></li>
-                <li><Link href="/career">Career</Link></li>
+                <li><NavLink href="/">Home</NavLink></li>
+                <li><NavLink href="/about">About</NavLink></li>
+                <li><NavLink href="/career">Career</NavLink></li>
             </ul>
             <div className='flex gap-2 justify-center items-center'>
                 <Image src={AvatarImage} width={30} height={30} alt='User Avatar'/>

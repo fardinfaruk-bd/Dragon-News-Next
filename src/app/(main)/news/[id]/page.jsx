@@ -1,9 +1,10 @@
 import React from 'react';
 
-const NewsDetailsPage = () => {
+const NewsDetailsPage = async({params}) => {
+    const {id} = await params;
     return (
         <div>
-            <h2 className="text-3xl font-bold  text-red-500">This is news details page</h2>
+            <h2>This is news details page</h2>
         </div>
     );
 };

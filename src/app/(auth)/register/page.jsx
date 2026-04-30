@@ -1,17 +1,42 @@
 "use client"
+import { authClient } from '@/lib/auth-client';
 import Link from 'next/link';
-import React from 'react';
+import { redirect } from 'next/navigation';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 const RegisterPage = () => {
 
 
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [isShowPassword, setIsShowPassword] = useState(false)
 
-    const handleRegister = (data) => {
+    const handleRegister = async (data) => {
         console.log(data);
+        const { name, photo, email, password } = data;
+
+        const { data: res, error } = await authClient.signUp.email({
+            name: name,
+            image: photo,
+            email: email,
+            password: password,
+        })
+
+        console.log(res, error);
+        if (error) {
+            toast.error(error.message)
+        }
+        if (res) {
+            await authClient.signOut();
+            toast.success("Sign up successfully")
+            redirect("/login")
+
+        }
 
     }
+
     return (
         <div className='container mx-auto min-h-screen flex justify-center items-center bg-[#F3F3F3]'>
             <div className='p-10 rounded-xl bg-white'>
@@ -33,9 +58,10 @@ const RegisterPage = () => {
                         <input type="email" {...register("email", { required: "This Email field is required" })} className="input w-full bg-[#F3F3F3] border-none" placeholder="Enter your Email Address" />
                         {errors.email && <span className='text-red-500'>{errors.email?.message}</span>}
                     </fieldset>
-                    <fieldset className="fieldset">
+                    <fieldset className="fieldset relative">
                         <legend className="fieldset-legend font-semibold text-[18px] text[#403F3F]">Password</legend>
-                        <input type="text" {...register("password", { required: "This name field is required" })} className="input w-full bg-[#F3F3F3] border-none" placeholder="Enter a Password" />
+                        <input type={isShowPassword ? "text" : "password"} {...register("password", { required: "This Password field is required" })} className="input w-full bg-[#F3F3F3] border-none" placeholder="Enter your password" />
+                        <span className='absolute right-2 top-4 cursor-pointer' onClick={() => setIsShowPassword(!isShowPassword)}>{isShowPassword ? <FaEyeSlash /> : <FaEye />}</span>
                         {errors.password && <span className='text-red-500'>{errors.password?.message}</span>}
                     </fieldset>
                     <div className='flex gap-2 items-center'>

@@ -64,9 +64,6 @@ const RightSidebar = () => {
                 </div>
             </div>
             <Image src={Bg} width={300} height={300} alt='Background Image' className='w-full'/>
-
-            
-
         </div >
     );
 };

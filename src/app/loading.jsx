@@ -3,7 +3,6 @@ import React from 'react';
 const LoadingPage = () => {
     return (
         <div className="flex justify-center items-center h-screen">
-            Global Loading
             <span className="loading loading-dots loading-xl"></span>
         </div>
     );
